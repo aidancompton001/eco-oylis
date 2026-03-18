@@ -1,0 +1,21 @@
+# Secrets
+docs/CREDENTIALS.md
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Temp
+*.log
+*.tmp
+node_modules/
+
+# Input docs (not for production)
+docs/input/
