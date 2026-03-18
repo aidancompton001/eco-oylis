@@ -26,7 +26,7 @@
 | **#2** | Milena Todorova | UX/UI Engineer | `ui-ux-pro-max` |
 | **#3** | Georgi Petrov | Frontend Engineer | `test-driven-development`, `verification-before-completion` |
 | **#4** | Oleksii Petrenko | Integration Engineer | `systematic-debugging` |
-| **#5** | Stoyan Ivanov | SRE / Platform | `verification-before-completion` |
+| **#5** | Viktor Kolev | SRE / Platform | `verification-before-completion` |
 | **#14** | Hans Landa | Critical Reviewer | `requesting-code-review`, cross-project audit |
 
 ---
@@ -174,7 +174,7 @@
 
 | # | Дата | Имя | Роль | Причина |
 |---|------|-----|------|---------|
-| — | — | — | — | — |
+| 1 | 2026-03-18 | Stoyan Ivanov | #5 SRE / Platform | Нарушение правила 3 (git init без ТС) + навязывание Netlify без согласования с CEO. Приказ CEO: увольнение. |
 
 ## Реестр замечаний (Strike System)
 
