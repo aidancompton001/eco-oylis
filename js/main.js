@@ -108,49 +108,54 @@
 
       // Collect form data
       var formData = new FormData(form);
-      // Remove honeypot from submission
       formData.delete('website');
 
-      // Send via Formspree
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).then(function (response) {
-        if (response.ok) {
-          formSuccess.hidden = false;
-          submitBtn.textContent = 'Изпратено';
-          form.reset();
-
-          // GA4 event
-          if (typeof gtag === 'function') {
-            gtag('event', 'form_submit', {
-              event_category: 'contact',
-              event_label: 'contact_form'
-            });
+      // Check if Formspree is configured
+      var action = form.getAttribute('action') || '';
+      if (action.indexOf('FORMSPREE_ID') === -1 && action.indexOf('formspree.io') !== -1) {
+        // Formspree configured — send via fetch
+        fetch(action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        }).then(function (response) {
+          if (response.ok) {
+            showSuccess();
+          } else {
+            fallbackMailto();
           }
+        }).catch(function () {
+          fallbackMailto();
+        });
+      } else {
+        // No Formspree — use mailto
+        fallbackMailto();
+      }
 
-          setTimeout(function () {
-            formSuccess.hidden = true;
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-          }, 5000);
-        } else {
+      function showSuccess() {
+        formSuccess.hidden = false;
+        submitBtn.textContent = originalText.indexOf('Send') !== -1 ? 'Sent' : 'Изпратено';
+        form.reset();
+        if (typeof gtag === 'function') {
+          gtag('event', 'form_submit', { event_category: 'contact', event_label: 'contact_form' });
+        }
+        setTimeout(function () {
+          formSuccess.hidden = true;
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
-          response.json().then(function (data) {
-            if (data.errors) {
-              alert(data.errors.map(function (e) { return e.message; }).join(', '));
-            } else {
-              alert('Грешка при изпращане. Моля, опитайте отново.');
-            }
-          });
-        }
-      }).catch(function () {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-        alert('Грешка при връзката. Моля, опитайте по-късно или се обадете на +359 884 908 414.');
-      });
+        }, 5000);
+      }
+
+      function fallbackMailto() {
+        var n = formData.get('name') || '';
+        var em = formData.get('email') || '';
+        var ph = formData.get('phone') || '';
+        var msg = formData.get('message') || '';
+        var subject = 'Запитване от ' + n + ' — eco-oylis.info';
+        var body = 'Име: ' + n + '\nEmail: ' + em + '\nТелефон: ' + ph + '\n\nСъобщение:\n' + msg;
+        window.location.href = 'mailto:oylis.tech@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        showSuccess();
+      }
     });
   }
 
