@@ -25,6 +25,24 @@
 
 **Артефакты:** `images/process-cycle.svg`, `images/process-cycle-en.svg`, `css/style.css`
 
+**Дополнение (S005 continued):**
+
+- Уволен #4 Oleksii Petrenko (Integration) — форма открывала Outlook вместо отправки. Нанят Andrei Dimitrov.
+- Форма исправлена: `formspree.io/f/email` → `formspree.io/email` (прямой endpoint). Mailto fallback убран.
+- Визуал по ДОПОВНЕННЯ: liquid dividers между всеми секциями, CTA amber glow (60px spread), benefit карточки olive ripple + lift, фоновые liquid drops на секциях (amber + olive radial gradients). Всё GPU-friendly (transform/opacity).
+- H2 min size: 22px → 28px по спеку.
+- `ui-ux-pro-max` скилл запущен: 17/18 PASS, 1 фикс применён.
+
+**Страйки сессии:**
+- #5 Stoyan Ivanov — уволен (git init без ТС, навязал Netlify)
+- #4 Oleksii Petrenko — уволен (форма не работала, Outlook fallback)
+
+**Нарушения протокола (ретроспектива):**
+- Правило 1: `ui-ux-pro-max` не запускался при создании MVP визуала
+- Правило 3: git init начат без ТС (M-задача)
+- Правило 3: Netlify навязан без вопроса
+- Правило 5: DEVLOG не обновлялся вовремя после каждого действия
+
 ---
 
 ### [S004] — 2026-03-18 — DEPLOY: Сайт live на eco-oylis.info
