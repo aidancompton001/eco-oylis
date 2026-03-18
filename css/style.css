@@ -106,7 +106,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .btn--primary:hover {
   background: linear-gradient(135deg, var(--accent-light), var(--accent));
-  box-shadow: 0 6px 32px rgba(200,145,58,0.35);
+  box-shadow: 0 6px 32px rgba(200,145,58,0.45), 0 0 60px rgba(200,145,58,0.15);
   transform: translateY(-2px);
   color: #fff;
 }
@@ -411,6 +411,43 @@ img { max-width: 100%; height: auto; display: block; }
   background: linear-gradient(180deg, var(--bg-primary) 0%, transparent 100%);
   z-index: 2;
 }
+.liquid-divider--dark {
+  background: linear-gradient(180deg, var(--bg-dark) 0%, transparent 100%);
+}
+.liquid-divider--bottom {
+  top: auto;
+  bottom: -2px;
+  background: linear-gradient(0deg, var(--bg-primary) 0%, transparent 100%);
+}
+
+/* Section background liquid drops */
+.section--liquid {
+  position: relative;
+  overflow: hidden;
+}
+.section--liquid::before,
+.section--liquid::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.section--liquid::before {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(200,145,58,0.06) 0%, transparent 70%);
+  animation: dropFloat 18s ease-in-out infinite;
+}
+.section--liquid::after {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  left: -50px;
+  background: radial-gradient(circle, rgba(107,124,63,0.05) 0%, transparent 70%);
+  animation: dropFloat 22s ease-in-out infinite 5s;
+}
 
 /* --- CARDS (Services) --- */
 .cards {
@@ -480,10 +517,27 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: all var(--duration) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.benefit::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--olive), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease);
 }
 .benefit:hover {
   border-color: var(--border-accent);
   background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+.benefit:hover::before {
+  transform: scaleX(1);
 }
 
 .benefit__icon {
