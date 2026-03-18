@@ -829,6 +829,10 @@ a.contact-item__value:hover { color: var(--accent-light); }
 }
 .cookie-category input { accent-color: var(--accent); }
 
+/* --- INFOGRAPHIC --- */
+.infographic { max-width: 800px; margin: 0 auto; }
+.infographic img { width: 100%; height: auto; border-radius: var(--radius-lg); }
+
 /* --- HONEYPOT (anti-spam) --- */
 .form-hp { position: absolute; left: -9999px; top: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
 
