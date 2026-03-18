@@ -110,27 +110,21 @@
       var formData = new FormData(form);
       formData.delete('website');
 
-      // Check if Formspree is configured
+      // Send via Formspree
       var action = form.getAttribute('action') || '';
-      if (action.indexOf('FORMSPREE_ID') === -1 && action.indexOf('formspree.io') !== -1) {
-        // Formspree configured — send via fetch
-        fetch(action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        }).then(function (response) {
-          if (response.ok) {
-            showSuccess();
-          } else {
-            fallbackMailto();
-          }
-        }).catch(function () {
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          showSuccess();
+        } else {
           fallbackMailto();
-        });
-      } else {
-        // No Formspree — use mailto
+        }
+      }).catch(function () {
         fallbackMailto();
-      }
+      });
 
       function showSuccess() {
         formSuccess.hidden = false;
