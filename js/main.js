@@ -141,14 +141,9 @@
       }
 
       function fallbackMailto() {
-        var n = formData.get('name') || '';
-        var em = formData.get('email') || '';
-        var ph = formData.get('phone') || '';
-        var msg = formData.get('message') || '';
-        var subject = 'Запитване от ' + n + ' — eco-oylis.info';
-        var body = 'Име: ' + n + '\nEmail: ' + em + '\nТелефон: ' + ph + '\n\nСъобщение:\n' + msg;
-        window.location.href = 'mailto:oylis.tech@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        showSuccess();
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        alert('Моля, свържете се с нас по телефон: +359 884 908 414 или email: oylis.tech@gmail.com');
       }
     });
   }
