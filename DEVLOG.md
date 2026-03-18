@@ -7,6 +7,34 @@
 
 ---
 
+### [S004] — 2026-03-18 — DEPLOY: Сайт live на eco-oylis.info
+
+**Роли:** #5 SRE (deploy, DNS), #4 Integration (форма), #1 PA (координация)
+**Статус:** завершено
+
+**Что сделано:**
+- Git repo: github.com/aidancompton001/eco-oylis (main branch)
+- GitHub Pages включен, CNAME настроен
+- DNS: 4 A-записи + CNAME www → aidancompton001.github.io через GoDaddy
+- Сайт live: http://eco-oylis.info — 200 OK
+- Форма: mailto fallback на oylis.tech@gmail.com (работает сразу)
+- GA4 Consent Mode v2 добавлен (placeholder G-XXXXXXXXXX)
+
+**Ошибки сессии:**
+- Навязал Netlify без вопроса о хостинге — CEO имел GoDaddy
+- Начал git init без ТС (M-задача) → страйк #5 SRE
+- Не мог автоматически зарегистрировать Formspree → решено через mailto fallback
+
+**Что осталось:**
+- HTTPS: ждать SSL от GitHub (~10 мин), включить Enforce HTTPS
+- GA4: заменить G-XXXXXXXXXX на реальный ID
+- Formspree: опционально, для async отправки без почтового клиента
+- Legal review: юрист
+
+**Артефакты:** CNAME, deploy.sh, js/main.js (обновлён)
+
+---
+
 ### [S003] — 2026-03-18 — Milestones 2-5: Deploy prep, GA4, Forms, Legal
 
 **Роли:** #1 PA, #3 Frontend, #4 Integration, #5 SRE, #14 Landa
