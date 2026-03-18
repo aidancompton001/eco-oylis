@@ -110,7 +110,7 @@
       var formData = new FormData(form);
       formData.delete('website');
 
-      // Send via Formspree
+      // Send via FormSubmit.co
       var action = form.getAttribute('action') || '';
       fetch(action, {
         method: 'POST',

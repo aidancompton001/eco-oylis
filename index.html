@@ -426,7 +426,7 @@
             </div>
           </div>
           <form class="contact-form" id="contactForm" data-reveal
-                action="https://formspree.io/oylis.tech@gmail.com" method="POST">
+                action="https://formsubmit.co/ajax/oylis.tech@gmail.com" method="POST">
             <div class="form-group">
               <label for="name" class="form-label">Име</label>
               <input type="text" id="name" name="name" class="form-input" required autocomplete="name">
@@ -443,6 +443,10 @@
               <label for="message" class="form-label">Съобщение</label>
               <textarea id="message" name="message" class="form-input form-textarea" rows="4" required></textarea>
             </div>
+            <!-- FormSubmit config -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" value="Ново запитване от eco-oylis.info">
             <!-- Honeypot anti-spam -->
             <div class="form-hp" aria-hidden="true">
               <label for="website">Website</label>
