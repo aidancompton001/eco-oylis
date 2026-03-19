@@ -45,7 +45,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css?v=19">
 
   <!-- Schema: Organization -->
   <script type="application/ld+json">
@@ -201,6 +201,7 @@
         <div class="liquid-drop liquid-drop--3"></div>
       </div>
 
+      <div id="hero-fluid" class="hero__fluid-canvas" aria-hidden="true"></div>
       <div class="container hero__content">
         <h1 class="hero__title">EKO-OYLIS — Systematic Approach to Used Cooking Oil Management in Bulgaria</h1>
         <p class="hero__subtitle">Ukrainian company with over 17 years of experience and 2500+ partners</p>
@@ -257,8 +258,42 @@
     <section class="section section--dark" id="process">
       <div class="container">
         <h2 class="section__title">How the process works</h2>
-        <div class="infographic" data-reveal>
-          <img src="../images/process-cycle-en.svg" alt="Used cooking oil collection process — 4 steps: contact, agreement, containers, collection" width="800" height="400" loading="lazy">
+        <div class="process">
+          <div class="process__step" data-reveal>
+            <div class="process__circle process__circle--amber">
+              <span class="process__number">01</span>
+              <span class="process__label">Contact</span>
+            </div>
+            <p class="process__desc">Connect with our office</p>
+          </div>
+          <svg class="process__arrow" viewBox="0 0 60 12" fill="none"><line x1="0" y1="6" x2="48" y2="6" stroke="#c8913a" stroke-width="2" stroke-dasharray="6 4"/><polygon points="48,2 58,6 48,10" fill="#c8913a" opacity="0.7"/></svg>
+          <div class="process__step" data-reveal>
+            <div class="process__circle process__circle--olive">
+              <span class="process__number process__number--olive">02</span>
+              <span class="process__label">Agreement</span>
+            </div>
+            <p class="process__desc">Individual terms</p>
+          </div>
+          <svg class="process__arrow" viewBox="0 0 60 12" fill="none"><line x1="0" y1="6" x2="48" y2="6" stroke="#c8913a" stroke-width="2" stroke-dasharray="6 4"/><polygon points="48,2 58,6 48,10" fill="#c8913a" opacity="0.7"/></svg>
+          <div class="process__step" data-reveal>
+            <div class="process__circle process__circle--amber">
+              <span class="process__number">03</span>
+              <span class="process__label">Containers</span>
+            </div>
+            <p class="process__desc">Containers 20-1000L delivery</p>
+          </div>
+          <svg class="process__arrow" viewBox="0 0 60 12" fill="none"><line x1="0" y1="6" x2="48" y2="6" stroke="#c8913a" stroke-width="2" stroke-dasharray="6 4"/><polygon points="48,2 58,6 48,10" fill="#c8913a" opacity="0.7"/></svg>
+          <div class="process__step" data-reveal>
+            <div class="process__circle process__circle--olive">
+              <span class="process__number process__number--olive">04</span>
+              <span class="process__label">Collection</span>
+            </div>
+            <p class="process__desc">Regular scheduled pickup</p>
+          </div>
+        </div>
+        <div class="process__cycle">
+          <svg class="process__cycle-back" viewBox="0 0 800 60" fill="none"><path d="M700 5 C700 55 100 55 100 5" stroke="#c8913a" stroke-width="1.5" stroke-dasharray="6 4"/><polygon points="105,10 95,5 105,0" fill="#c8913a" opacity="0.7"/></svg>
+          <p class="process__cycle-text">Cyclical process — regular collection</p>
         </div>
       </div>
     </section>
@@ -496,6 +531,7 @@
     </div>
   </div>
 
-  <script src="../js/main.js"></script>
+  <script defer src="../js/webgl-fluid.min.js"></script>
+  <script defer src="../js/main.js"></script>
 </body>
 </html>

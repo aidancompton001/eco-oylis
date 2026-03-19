@@ -7,6 +7,219 @@
 
 ---
 
+### [S015] — 2026-03-19 — Унификация линий между секциями
+
+**Роли:** #2 Stefan Dimitrov (UX/UI)
+**Статус:** завершено
+
+**Что сделано:**
+
+- Все секции: единый `border-top: 1px solid rgba(200,145,58,0.1)`
+- `.section--dark` box-shadow убран
+- `.liquid-divider` скрыты (`display: none`)
+- Footer border-top приведён к тому же стилю (0.1)
+- Результат: все стыки одинаковые — тонкая amber линия
+
+**Артефакты:** `css/style.css`
+
+---
+
+### [S014] — 2026-03-19 — Hero fade: мягкий переход в следующую секцию
+
+**Роли:** #2 Stefan Dimitrov (новый UX/UI), #14 Landa (валидация)
+**Статус:** завершено
+
+**Что сделано:**
+
+- `.hero::after` — gradient fade 100px от низа hero в `--bg-primary`
+- WebGL fluid плавно растворяется внизу
+- `pointer-events: none` — не блокирует клики
+- Box-shadow и liquid dividers НЕ тронуты (Landa: достаточны)
+
+**Артефакты:** `css/style.css`
+
+---
+
+### [S013] — 2026-03-19 — ИНЦИДЕНТ: Нарушение протокола CEO
+
+**Статус:** ИНЦИДЕНТ
+
+**Что произошло:**
+
+- CEO поставил задачу "убрать артефакты, сделать переходы мягкими" через ПРОТОКОЛ (пункты 1-8)
+- #2 Ivan Georgiev (UX/UI) начал реализацию БЕЗ формирования ТС (пункт 4) и БЕЗ показа CEO (пункт 5)
+- #1 Dmytro Kovalchuk (PA) не остановил нарушение — допустил реализацию без ТС
+- CEO остановил выполнение и потребовал расстрел обоих
+
+**Приказ CEO:**
+
+- #2 Ivan Georgiev — расстрелян. Нарушение пунктов 4-5 протокола
+- #1 Dmytro Kovalchuk — расстрелян. Системный провал контроля протокола
+- Записано в TEAM.md: реестр увольнений + реестр замечаний
+
+**Урок:** ПРОТОКОЛ — ЗАКОН. Ни одна задача не начинается без ТС + ОК от CEO. Без исключений. Независимо от размера.
+
+---
+
+### [S012] — 2026-03-19 — Process: живая анимация + section glow dividers
+
+**Роли:** #2 Krasimir Stoyanov (новый UX/UI), #14 Landa (5 bugfixes)
+**Статус:** завершено
+
+**Что сделано:**
+
+- BUG FIX: liquid fill opacity 0.12→0.25/0.20 (был невидим на тёмном фоне)
+- BUG FIX: stroke-dashoffset 200→80 (был больше длины path → линия невидима)
+- BUG FIX: cycle arrow dashoffset 1000→800
+- NEW: @keyframes liquidPulse — liquid fill дышит (50→55%, 3s infinite)
+- NEW: @keyframes amberGlowPulse — amber круги пульсируют (4s infinite)
+- NEW: @keyframes oliveGlowPulse — olive круги пульсируют (4s, 2s delay)
+- Lines: width 60→80px, stroke-width 2→3, opacity 0.8
+- Section dividers: linear-gradient → radial-gradient amber glow
+- Milena Todorova (#2) уволена: 2/2 страйка. Замена: Krasimir Stoyanov
+
+**Артефакты:** `css/style.css`
+
+---
+
+### [S011] — 2026-03-19 — Process секция: анимированный жидкий процесс
+
+**Роли:** #2 UX/UI (страйк 1/2), #3 FE, #14 Landa (конкретные CSS-значения, валидация)
+**Статус:** завершено
+
+**Что сделано:**
+
+- Статичный SVG (`process-cycle.svg`) заменён на HTML-секцию с CSS-анимациями
+- 4 шага: glassmorphism круги (amber/olive), liquid fill снизу при reveal
+- Flowing lines: inline SVG `stroke-dashoffset` анимация — масло "перетекает"
+- Cycle arrow: SVG path с dash-анимацией (delay после шагов)
+- Номера 01-04: amber/olive text-shadow glow
+- Hover: amber/olive box-shadow glow на кругах
+- Stagger 200ms между шагами (Landa: не 300ms)
+- Mobile: вертикальный stack, cycle arrow скрыт
+- BG + EN: оба файла обновлены с корректными переводами
+
+**Артефакты:** `index.html`, `en/index.html`, `css/style.css`, `js/main.js`
+
+---
+
+### [S010] — 2026-03-19 — Liquid Oil Theme ВЕЗДЕ
+
+**Роли:** #2 UX/UI, #3 FE, #14 Landa (конкретные CSS-значения)
+**Статус:** завершено — ждём визуальную проверку CEO
+
+**Что сделано:**
+
+- Cards (services): glassmorphism (backdrop-blur 12px, amber 0.03 bg, amber glow hover)
+- Benefits: olive glassmorphism, olive glow hover, icon drop-shadow
+- Stats числа: amber text-shadow glow (30px + 60px)
+- Partners: белый #f5f5f5 → тёмный glassmorphism (amber), amber glow hover
+- FAQ: amber left-border 3px при open + padding shift
+- Contact form: glassmorphism, input amber tint, enhanced focus glow (20px)
+- Contact icons: amber drop-shadow
+- Footer: amber gradient border-top, radial glow снизу (ёмкость с маслом)
+- Section titles: subtle amber text-shadow
+- About legal: glassmorphism
+- Infographic: amber border + glow
+- Section liquid drops: увеличены (400px/300px), opacity усилена (0.1/0.08)
+
+**Ключевые решения:**
+
+- Все значения из Landa Report — конкретные CSS, не "слова"
+- `-webkit-backdrop-filter` на всех glassmorphism элементах (Safari)
+- Icon glow через `filter: drop-shadow` (не box-shadow) — по рекомендации Landa
+
+**Артефакты:** `css/style.css`
+
+---
+
+### [S009] — 2026-03-19 — WebGL Fluid Hero + Staggered Scroll = 9/10
+
+**Роли:** #2 UX/UI, #3 FE, #1 PA, #14 Landa (валидация ТС)
+**Статус:** завершено — ждём визуальную проверку CEO + Landa
+
+**Что сделано:**
+
+- Полная зачистка: удалены все CSS drip/wave/card oil effects (~130 строк)
+- Footer восстановлен (border-top, padding 3rem)
+- WebGL Fluid Simulation в hero: `webgl-fluid-enhanced` v0.8.0 (54KB, MIT)
+  - Amber/olive палитра, bloom, sunrays, mouse interaction
+  - Скрипт локальный (`/js/webgl-fluid.min.js`), не CDN
+  - Desktop only; mobile — CSS blobs fallback
+  - CSS blobs скрываются после init fluid (один рендер)
+- Staggered scroll reveals: карточки появляются одна за другой
+  - Services: 150ms между карточками
+  - Benefits: 120ms, Partners: 100ms, FAQ: 100ms, Stats: 200ms
+- Оба скрипта `defer` — не блокируют FCP
+
+**Ключевые решения:**
+
+- Все 5 условий Landa выполнены (локальный скрипт, один рендер, конфиг в main.js, mobile OFF, stagger)
+- `WebGLFluidEnhanced.default || WebGLFluidEnhanced` — совместимость UMD/ESM
+- `try/catch` на fluid init — graceful fallback
+
+**Артефакты:** `css/style.css`, `js/main.js`, `js/webgl-fluid.min.js`, `index.html`, `en/index.html`
+
+**Следующие шаги:**
+
+- CEO визуальная проверка (desktop: fluid + mouse, mobile: CSS blobs)
+- Landa Review → подтверждение 9/10
+
+---
+
+### [S008] — 2026-03-19 — Liquid Oil Effects: масло стекает по странице
+
+**Роли:** #2 UX/UI, #1 PA (координация), #3 FE (responsive), #14 Landa (валидация ТС)
+**Статус:** Phase 1 завершена — ждём визуальную проверку CEO
+
+**Что сделано:**
+
+- Header drips: 3 SVG-капли масла стекают с нижнего края хедера (14px/10px/8px, amber, анимация pulse)
+- Falling drop: анимированная капля падает в hero-секции (6s цикл)
+- Wave dividers: SVG-волны заменили gradient-dividers на стыках секций (amber stroke 0.12 opacity)
+- Footer oil container: волнистый верхний край (SVG wave + amber stroke) + radial glow снизу
+- Card drips: потёки на 3 элементах (services card 1/3, benefit 2) через background-image
+- Splash: subtle radial-gradient splash под каплями в hero
+- Mobile: упрощено на ≤768px (меньше drips, нет card decorations, нет falling drop)
+- Reduced motion: все анимации отключаются через existing prefers-reduced-motion rule
+
+**Ключевые решения:**
+
+- Все SVG через CSS data-URI (не inline HTML) — один style.css обслуживает BG + EN
+- Card drips через background-image (не pseudo-elements — ::after/.::before заняты)
+- Footer: border-top удалён, заменён на SVG wave; padding-top увеличен для волны
+- Командная валидация ТС: все 6 специалистов оценили риски перед реализацией
+
+**Артефакты:** `css/style.css`
+
+**Следующие шаги:**
+
+- CEO визуальная проверка (desktop + mobile)
+- Phase 2 (если нужно): тюнинг opacity, позиций, размеров капель по обратной связи
+
+---
+
+### [S007] — 2026-03-19 — Hero: центрирование контента
+
+**Роли:** #2 UX/UI Engineer
+**Статус:** завершено
+
+**Что сделано:**
+
+- Hero-секция: заголовок, подзаголовок и CTA-кнопки выровнены по центру (desktop + mobile)
+
+**Ключевые решения:**
+
+- `text-align: center` + `margin: 0 auto` на `.hero__content` — минимальные изменения без ломки layout
+
+**Артефакты:** `css/style.css`
+
+**Следующие шаги:**
+
+- Визуальная проверка CEO
+
+---
+
 ### [S006] — 2026-03-18 — Развёртывание методологии V7.0
 
 **Роли:** #1 Product Architect (координация)

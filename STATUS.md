@@ -1,29 +1,29 @@
 # STATUS.md — EKO-OYLIS
 
-**Обновлено:** 2026-03-18
-**Этап:** All Milestones Code-Complete
-**Сессия:** S003
+**Обновлено:** 2026-03-19
+**Методология:** V7.0
+**Сессия:** S012
 
 ---
 
 ## Milestones
 
-| # | Stage | Status | Blocker |
-|---|-------|--------|---------|
+| # | Этап | Статус | Блокер |
+|---|------|--------|--------|
 | 0 | Setup V6.1 | DONE | — |
-| 1 | MVP Landing | DONE (9/10 Landa) | — |
-| 2 | Deploy | CODE READY | CEO: Netlify register + DNS |
-| 3 | Analytics + SEO | CODE READY | CEO: создать GA4 property |
-| 4 | Legal Review | PENDING | CEO: найти юриста |
-| 5 | Form Backend | CODE READY | CEO: Formspree register |
+| 1 | MVP Landing (9/10 Landa) | DONE | — |
+| 2 | Deploy (GitHub Pages) | CODE READY | CEO: DNS настройка |
+| 3 | Analytics + SEO | CODE READY | CEO: GA4 property ID |
+| 4 | Legal Review | PENDING | CEO: юрист |
+| 5 | Form Backend | CODE READY | CEO: FormSubmit.co confirm |
+| 6 | V7.0 Deployment | DONE | — |
 
 ## Что требует действий CEO
 
-1. **Netlify:** зарегистрировать на oylis.tech@gmail.com → подключить repo
-2. **DNS:** направить eco-oylis.info на Netlify
-3. **GA4:** создать property → заменить `G-XXXXXXXXXX` в 2 файлах
-4. **Formspree:** зарегистрировать → заменить `FORMSPREE_ID` в 2 файлах
-5. **Юрист:** ревью 6 legal pages
+1. **DNS:** направить eco-oylis.info на GitHub Pages
+2. **GA4:** создать property → заменить `G-XXXXXXXXXX`
+3. **FormSubmit.co:** подтвердить email после первой отправки
+4. **Юрист:** ревью 6 legal pages
 
 ## Tech Debt
 

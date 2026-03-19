@@ -27,7 +27,30 @@
     });
   }
 
-  // --- Scroll Reveal ---
+  // --- Staggered Scroll Reveal ---
+  var staggerConfigs = {
+    '.process': { stagger: 200, selector: '[data-reveal]' },
+    '.cards': { stagger: 150, selector: '.card' },
+    '.benefits__grid': { stagger: 120, selector: '.benefit' },
+    '.about__stats': { stagger: 200, selector: '.stat' },
+    '.partners-grid': { stagger: 100, selector: '.partner-card' },
+    '.faq__list': { stagger: 100, selector: '.faq__item' }
+  };
+
+  // Find parent container for a reveal element and return stagger delay
+  function getStaggerDelay(el) {
+    for (var parentSelector in staggerConfigs) {
+      var config = staggerConfigs[parentSelector];
+      var parent = el.closest(parentSelector);
+      if (parent) {
+        var siblings = Array.prototype.slice.call(parent.querySelectorAll(config.selector));
+        var index = siblings.indexOf(el);
+        if (index >= 0) return index * config.stagger;
+      }
+    }
+    return 0;
+  }
+
   var revealElements = document.querySelectorAll('[data-reveal]');
 
   if (revealElements.length > 0 && 'IntersectionObserver' in window) {
@@ -35,19 +58,24 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
+            var delay = getStaggerDelay(entry.target);
+            entry.target.style.transitionDelay = delay + 'ms';
             entry.target.classList.add('revealed');
             revealObserver.unobserve(entry.target);
+            // Clean up delay after animation completes
+            setTimeout(function () {
+              entry.target.style.transitionDelay = '';
+            }, delay + 900);
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
 
     revealElements.forEach(function (el) {
       revealObserver.observe(el);
     });
   } else {
-    // Fallback: show all
     revealElements.forEach(function (el) {
       el.classList.add('revealed');
     });
@@ -55,7 +83,6 @@
 
   // --- Header scroll effect ---
   var header = document.getElementById('header');
-  var lastScroll = 0;
 
   window.addEventListener('scroll', function () {
     var scrollY = window.pageYOffset || document.documentElement.scrollTop;
@@ -64,7 +91,6 @@
     } else {
       header.style.background = 'rgba(13,15,14,0.85)';
     }
-    lastScroll = scrollY;
   }, { passive: true });
 
   // --- Contact Form ---
@@ -251,6 +277,57 @@
         marketing: marketing ? marketing.checked : false
       });
     });
+  }
+
+  // --- WebGL Fluid Hero (desktop only) ---
+  var fluidContainer = document.getElementById('hero-fluid');
+  var heroLiquid = document.querySelector('.hero__liquid');
+  var isMobile = window.innerWidth <= 768;
+
+  var FluidClass = (typeof WebGLFluidEnhanced !== 'undefined') &&
+    (WebGLFluidEnhanced.default || WebGLFluidEnhanced);
+
+  if (fluidContainer && !isMobile && FluidClass) {
+    try {
+      var fluid = new FluidClass(fluidContainer);
+      fluid.setConfig({
+        simResolution: 128,
+        dyeResolution: 1024,
+        densityDissipation: 0.97,
+        velocityDissipation: 0.98,
+        pressure: 0.8,
+        pressureIterations: 20,
+        curl: 30,
+        splatRadius: 0.3,
+        splatForce: 6000,
+        shading: true,
+        colorful: false,
+        colorPalette: ['#c8913a', '#daa94e', '#6b7c3f', '#8a9e52'],
+        hover: true,
+        backgroundColor: '#0d0f0e',
+        transparent: false,
+        brightness: 0.5,
+        bloom: true,
+        bloomIterations: 8,
+        bloomResolution: 256,
+        bloomIntensity: 0.8,
+        bloomThreshold: 0.6,
+        bloomSoftKnee: 0.7,
+        sunrays: true,
+        sunraysResolution: 196,
+        sunraysWeight: 1.0
+      });
+      fluid.start();
+      // Initial splats for visual impact on load
+      if (fluid.simulation && fluid.simulation.multipleSplats) {
+        fluid.simulation.multipleSplats(8);
+      }
+      // Hide CSS blobs — fluid replaces them (Landa #3: one render, not two)
+      if (heroLiquid) heroLiquid.style.display = 'none';
+    } catch (e) {
+      // WebGL not supported — CSS blobs remain as fallback
+      if (fluidContainer) fluidContainer.style.display = 'none';
+    }
   }
 
   // --- Scroll depth tracking (50%) ---
