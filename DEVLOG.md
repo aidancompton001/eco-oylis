@@ -7,6 +7,32 @@
 
 ---
 
+### [S016] — 2026-03-19 — WebGL Fluid на мобильной версии
+
+**Роли:** #2 UX/UI Engineer, #14 Hans Landa (ТС ревью — PASSED)
+**Статус:** завершено
+
+**Что сделано:**
+
+- WebGL Fluid включён на mobile (≤768px) с пониженными GPU-параметрами (simRes 64, dyeRes 512, bloom 4 iter, sunrays OFF → ~60% снижение нагрузки)
+- `prefers-reduced-motion: reduce` → WebGL НЕ запускается (accessibility)
+- Touch-events: touchmove на canvas → splat (как hover на desktop)
+- IntersectionObserver: pause/resume fluid когда hero вне viewport (battery save)
+- FPS benchmark (2 сек): <20fps → автоматический fallback на CSS blobs
+- CSS: `display: none` с canvas убран, fallback blob opacity 0.05 → 0.18
+- CSS: `pointer-events: none` на hero__content, auto на btn/a (touch passthrough)
+- CSS: `min-height: 100svh` для Safari dynamic viewport fix
+
+**Ключевые решения:**
+
+- Desktop конфиг НЕ изменён — отдельные объекты desktopConfig/mobileConfig
+- Конфиг фиксируется при загрузке (нет resize listener — по ТС)
+- Initial splats: 4 на mobile vs 8 на desktop
+
+**Артефакты:** `js/main.js`, `css/style.css`
+
+---
+
 ### [S015] — 2026-03-19 — Унификация линий между секциями
 
 **Роли:** #2 Stefan Dimitrov (UX/UI)

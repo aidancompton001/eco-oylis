@@ -279,51 +279,132 @@
     });
   }
 
-  // --- WebGL Fluid Hero (desktop only) ---
+  // --- WebGL Fluid Hero (desktop + mobile) ---
   var fluidContainer = document.getElementById('hero-fluid');
   var heroLiquid = document.querySelector('.hero__liquid');
   var isMobile = window.innerWidth <= 768;
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var FluidClass = (typeof WebGLFluidEnhanced !== 'undefined') &&
     (WebGLFluidEnhanced.default || WebGLFluidEnhanced);
 
-  if (fluidContainer && !isMobile && FluidClass) {
+  var desktopConfig = {
+    simResolution: 128,
+    dyeResolution: 1024,
+    densityDissipation: 0.97,
+    velocityDissipation: 0.98,
+    pressure: 0.8,
+    pressureIterations: 20,
+    curl: 30,
+    splatRadius: 0.3,
+    splatForce: 6000,
+    shading: true,
+    colorful: false,
+    colorPalette: ['#c8913a', '#daa94e', '#6b7c3f', '#8a9e52'],
+    hover: true,
+    backgroundColor: '#0d0f0e',
+    transparent: false,
+    brightness: 0.5,
+    bloom: true,
+    bloomIterations: 8,
+    bloomResolution: 256,
+    bloomIntensity: 0.8,
+    bloomThreshold: 0.6,
+    bloomSoftKnee: 0.7,
+    sunrays: true,
+    sunraysResolution: 196,
+    sunraysWeight: 1.0
+  };
+
+  var mobileConfig = {
+    simResolution: 64,
+    dyeResolution: 512,
+    densityDissipation: 0.97,
+    velocityDissipation: 0.98,
+    pressure: 0.8,
+    pressureIterations: 20,
+    curl: 30,
+    splatRadius: 0.25,
+    splatForce: 6000,
+    shading: true,
+    colorful: false,
+    colorPalette: ['#c8913a', '#daa94e', '#6b7c3f', '#8a9e52'],
+    hover: true,
+    backgroundColor: '#0d0f0e',
+    transparent: false,
+    brightness: 0.5,
+    bloom: true,
+    bloomIterations: 4,
+    bloomResolution: 128,
+    bloomIntensity: 0.8,
+    bloomThreshold: 0.6,
+    bloomSoftKnee: 0.7,
+    sunrays: false
+  };
+
+  if (fluidContainer && !prefersReducedMotion && FluidClass) {
     try {
       var fluid = new FluidClass(fluidContainer);
-      fluid.setConfig({
-        simResolution: 128,
-        dyeResolution: 1024,
-        densityDissipation: 0.97,
-        velocityDissipation: 0.98,
-        pressure: 0.8,
-        pressureIterations: 20,
-        curl: 30,
-        splatRadius: 0.3,
-        splatForce: 6000,
-        shading: true,
-        colorful: false,
-        colorPalette: ['#c8913a', '#daa94e', '#6b7c3f', '#8a9e52'],
-        hover: true,
-        backgroundColor: '#0d0f0e',
-        transparent: false,
-        brightness: 0.5,
-        bloom: true,
-        bloomIterations: 8,
-        bloomResolution: 256,
-        bloomIntensity: 0.8,
-        bloomThreshold: 0.6,
-        bloomSoftKnee: 0.7,
-        sunrays: true,
-        sunraysResolution: 196,
-        sunraysWeight: 1.0
-      });
+      fluid.setConfig(isMobile ? mobileConfig : desktopConfig);
       fluid.start();
+
       // Initial splats for visual impact on load
       if (fluid.simulation && fluid.simulation.multipleSplats) {
-        fluid.simulation.multipleSplats(8);
+        fluid.simulation.multipleSplats(isMobile ? 4 : 8);
       }
+
       // Hide CSS blobs — fluid replaces them (Landa #3: one render, not two)
       if (heroLiquid) heroLiquid.style.display = 'none';
+
+      // Touch-events for mobile — forward to fluid simulation
+      if ('ontouchstart' in window && fluid.simulation) {
+        fluidContainer.addEventListener('touchmove', function(e) {
+          e.preventDefault();
+          var touch = e.touches[0];
+          var rect = fluidContainer.getBoundingClientRect();
+          var x = (touch.clientX - rect.left) / rect.width;
+          var y = (touch.clientY - rect.top) / rect.height;
+          if (fluid.simulation.splatPointer) {
+            fluid.simulation.splatPointer(x, y);
+          }
+        }, { passive: false });
+      }
+
+      // IntersectionObserver — pause/resume when hero leaves viewport (battery save)
+      var heroObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            fluid.activate ? fluid.activate() : fluid.start();
+          } else {
+            fluid.deactivate ? fluid.deactivate() : fluid.stop();
+          }
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(fluidContainer);
+
+      // FPS benchmark on mobile — auto-fallback for weak devices
+      if (isMobile) {
+        var frameCount = 0;
+        var benchStart = performance.now();
+        var benchRAF;
+
+        function benchFrame() {
+          frameCount++;
+          if (performance.now() - benchStart >= 2000) {
+            var fps = frameCount / 2;
+            if (fps < 20) {
+              // Too slow — kill WebGL, show CSS fallback
+              if (fluid.stop) fluid.stop();
+              fluidContainer.style.display = 'none';
+              if (heroLiquid) heroLiquid.style.display = '';
+            }
+            return;
+          }
+          benchRAF = requestAnimationFrame(benchFrame);
+        }
+        benchRAF = requestAnimationFrame(benchFrame);
+      }
+
     } catch (e) {
       // WebGL not supported — CSS blobs remain as fallback
       if (fluidContainer) fluidContainer.style.display = 'none';

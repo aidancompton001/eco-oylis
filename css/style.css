@@ -280,6 +280,11 @@ img { max-width: 100%; height: auto; display: block; }
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
+  pointer-events: none;
+}
+.hero__content .btn,
+.hero__content a {
+  pointer-events: auto;
 }
 
 .hero__title {
@@ -1231,7 +1236,7 @@ a.contact-item__value:hover { color: var(--accent-light); }
   }
   .header__phone .icon-phone { width: 22px; height: 22px; }
 
-  .hero { min-height: auto; padding: 7rem 0 4rem; }
+  .hero { min-height: 100svh; padding: 7rem 0 4rem; }
   .hero__cta { flex-direction: column; }
   .hero__cta .btn { width: 100%; justify-content: center; }
 
@@ -1248,12 +1253,11 @@ a.contact-item__value:hover { color: var(--accent-light); }
   .cookie-banner__actions { justify-content: center; }
 
   /* Simplify liquid on mobile */
-  .liquid-blob--1 { width: 80vw; opacity: 0.05; }
+  .liquid-blob--1 { width: 80vw; opacity: 0.18; }
   .liquid-blob--2 { display: none; }
   .liquid-drop--2, .liquid-drop--3 { display: none; }
 
-  /* Hide fluid canvas on mobile */
-  .hero__fluid-canvas { display: none; }
+  /* WebGL fluid canvas visible on mobile (reduced params in JS) */
 
   /* Process: vertical stack on mobile */
   .process {

@@ -2,7 +2,7 @@
 
 **Обновлено:** 2026-03-19
 **Методология:** V7.0
-**Сессия:** S012
+**Сессия:** S016
 
 ---
 
@@ -17,6 +17,10 @@
 | 4 | Legal Review | PENDING | CEO: юрист |
 | 5 | Form Backend | CODE READY | CEO: FormSubmit.co confirm |
 | 6 | V7.0 Deployment | DONE | — |
+
+## Последняя сессия (S016)
+
+WebGL Fluid включён на mobile: пониженные GPU-параметры, touch-events, IntersectionObserver pause/resume, FPS benchmark auto-fallback, prefers-reduced-motion accessibility, Safari 100svh fix.
 
 ## Что требует действий CEO
 
