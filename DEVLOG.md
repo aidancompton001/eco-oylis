@@ -7,6 +7,57 @@
 
 ---
 
+### [S006] — 2026-03-18 — Развёртывание методологии V7.0
+
+**Роли:** #1 Product Architect (координация)
+**Статус:** завершено
+
+**Что сделано:**
+- CLAUDE.md переписан по CLAUDE_TEMPLATE V7.0 из MainCore
+- TEAM.md переписан по TEAM_TEMPLATE V7.0 из MainCore
+- Все профили специалистов расширены: глубинные знания 5-7 пунктов каждому
+- Замены уволенных: #4 Andrei Dimitrov (вместо Oleksii Petrenko), #6 Viktor Kolev (вместо Stoyan Ivanov)
+- #14 Hans Landa — профиль сохранён без изменений (untouchable)
+- STATUS.md обновлён под текущее состояние
+- Добавлен Milestone 6 (V7.0 Deployment)
+
+**Ключевые решения:**
+- #5 SRE переименован в #6 SRE — нумерация выровнена с шаблоном V7.0
+- Хостинг зафиксирован как GitHub Pages (Locked) — по факту деплоя
+- FormSubmit.co зафиксирован как form backend — по факту последней рабочей интеграции
+
+**Артефакты:** `CLAUDE.md`, `TEAM.md`, `DEVLOG.md`, `STATUS.md`
+
+**Следующие шаги:**
+- CEO: GA4 property ID, FormSubmit.co подтверждение email, юрист для legal review
+- Команда: ждёт задачи от CEO
+
+---
+
+### [S007] — 2026-03-19 — Логотипы партнёров: grid замена PNG
+
+**Роли:** #2 Milena Todorova (UX/UI), #14 Hans Landa (аудит)
+**Статус:** завершено
+
+**Что сделано:**
+- Заменена единая PNG на 6 отдельных логотипов (KFC, McDonald's, Auchan, Hesburger, МегаМаркет, Chicken Hut)
+- CSS grid 3×2 (desktop) → 2×3 (mobile), белые карточки #f5f5f5, hover amber glow
+- Подпись "Партньори в Украйна" / "Partners in Ukraine" — территориальное разграничение (замечание Landa C1)
+- Контраст Chicken Hut решён через #f5f5f5 фон карточек (замечание Landa S3)
+- Единый контейнер 160×70px с object-fit: contain (замечание Landa S4)
+- AI/ZIP/оригиналы в .gitignore (замечание Landa S1)
+
+**Ключевые решения:**
+- Белые карточки на тёмном фоне (как в оригинальном дизайне image.png) — #f5f5f5 а не #fff для контраста жёлтых логотипов
+- Mobile 2×3 а не 1×6 — scroll fatigue (замечание Landa N2)
+- KFC = PrimaryBrandLogo (замечание Landa S2)
+
+**Артефакты:** `index.html`, `en/index.html`, `css/style.css`, `images/logos/*`, `.gitignore`
+
+**Landa Review:** CONDITIONAL PASS → все 6 замечаний внедрены
+
+---
+
 ### РЕТРОСПЕКТИВА ПРОЕКТА — 2026-03-18
 
 **Команда систематически нарушала протокол V6.1 на протяжении всей сессии.**

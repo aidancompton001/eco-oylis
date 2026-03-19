@@ -19,3 +19,16 @@ node_modules/
 
 # Input docs (not for production)
 docs/input/
+
+# Logo source files (not for web)
+*.ai
+*.zip
+images/logos/__MACOSX/
+images/logos/primary-kfc-logo/
+images/logos/download-*/
+images/logos/KFC_*.jpg
+images/logos/503365691*.jpg
+images/logos/mcdonalds-5.svg
+images/logos/auchan-5.svg
+images/logos/Hesburger_logo.svg
+images/logos/МегаМаркет_*
